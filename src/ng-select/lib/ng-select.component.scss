@@ -51,12 +51,15 @@
     }
     .ng-select-container {
         cursor: default;
-        display: flex;
+        display: grid;
+        grid-template:
+            "value clear arrow" auto / 1fr 2.5rem 2.5rem;
         outline: none;
         overflow: hidden;
         position: relative;
         width: 100%;
         .ng-value-container {
+            grid-area: value;
             display: flex;
             flex: 1;
             .ng-input {
@@ -126,7 +129,13 @@
                         }
                     }
                     .ng-value-icon {
+                        line-height: 1;
+                        vertical-align: text-bottom;
                         cursor: pointer;
+
+                        svg {
+                            width: 10px;
+                        }
                     }
                 }
                 .ng-input {
@@ -140,16 +149,17 @@
         }
     }
     .ng-clear-wrapper {
-        cursor: pointer;
+        grid-area: clear;
         position: relative;
-        width: 17px;
+        cursor: pointer;
         user-select: none;
+
         .ng-clear {
-            display: inline-block;
-            font-size: 18px;
-            line-height: 1;
             pointer-events: none;
         }
+    }
+    .ng-arrow-wrapper {
+        grid-area: arrow;
     }
     .ng-spinner-loader {
         border-radius: 50%;
@@ -191,18 +201,33 @@
             }
         }
     }
+
+    .ng-clear-wrapper,
     .ng-arrow-wrapper {
-        cursor: pointer;
-        position: relative;
-        text-align: center;
-        user-select: none;
-        .ng-arrow {
-            pointer-events: none;
-            display: inline-block;
-            height: 0;
-            width: 0;
-            position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem; // Click area affordance
+        height: 100%;
+
+        button {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border: 0;
         }
+
+        svg {
+            height: 100%;
+        }
+    }
+
+    .ng-arrow-wrapper svg {
+        width: 12px;
+    }
+
+    .ng-clear-wrapper svg {
+        width: 10px;
     }
 }
 
