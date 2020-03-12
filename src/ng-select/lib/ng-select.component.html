@@ -3,12 +3,14 @@
      [class.ng-appearance-outline]="appearance === 'outline'"
      [class.ng-has-value]="hasValue"
      class="ng-select-container"
+     [attr.role]="multiple ? 'listbox' : null" 
+     [attr.aria-haspopup]="multiple ? 'listbox' : null" 
      [attr.aria-multiselectable]="multiple ? 'true' : null" 
      [attr.aria-labelledby]="multiple ? labelledBy : null"
      [tabIndex]="(multiple && selectedItems.length > 0 && !focusedTag) ? 0 : -1">
 
     <div class="ng-value-container">
-        <ng-container *ngIf="((multiple && !multiLabelTemplate) || !searchable) && selectedItems.length > 0">
+        <ng-container *ngIf="!multiLabelTemplate && selectedItems.length > 0">
             <div #tag *ngFor="let item of selectedItems; trackBy: trackByOption"
                  [class.ng-value-disabled]="item.disabled"
                  class="ng-value"
@@ -38,26 +40,26 @@
 
         <div class="ng-input">
             <input #searchInput
-                   [attr.id]="labelForId"
-                   [attr.tabindex]="tabIndex"
-                   [disabled]="disabled"
+                   role="combobox"
+                   aria-haspopup="true"
+                   [required]="required"
+                   [placeholder]="this.selectedItems && this.selectedItems.length ? '':placeholder"
+                   [readonly]="!searchable || itemsList.maxItemsSelected"
                    [value]="searchTerm ? searchTerm : ''"
+                   [disabled]="disabled"
                    (input)="filter(searchInput.value)"
                    (compositionstart)="onCompositionStart()"
                    (compositionend)="onCompositionEnd(searchInput.value)"
                    (focus)="onInputFocus($event)"
                    (blur)="onInputBlur($event)"
                    (change)="$event.stopPropagation()"
-                   role="combobox"
-                   aria-haspopup="true"
-                   [required]="required"
-                   [placeholder]="this.selectedItems && this.selectedItems.length ? '':placeholder"
+                   [attr.id]="labelForId"
+                   [attr.tabindex]="tabIndex"
                    [attr.aria-owns]="isOpen ? dropdownId : null"
                    [attr.aria-activedescendant]="isOpen ? itemsList?.markedItem?.htmlId : null"
                    [attr.aria-autocomplete]="searchable ? 'list' : null"
                    [attr.aria-expanded]="isOpen ? true : false"
                    [attr.aria-invalid]="invalid"
-                   [attr.readonly]="!searchable || itemsList.maxItemsSelected"
                    [attr.aria-describedby]="describedBy">
         </div>
     </div>
