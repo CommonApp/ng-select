@@ -2,6 +2,12 @@
 
 Started to maintain versions made from Common App for forked version.
 
+## 2.6.0
+
+- feat: replace clear and dropdown icons with FontAwesome SVGs
+- feat: grid-based layout for select-container
+- fix: values not appearing when chosen
+
 ## 2.5.2
 
 - feat: add wrapping span to non-value options for spanning new grid setup
