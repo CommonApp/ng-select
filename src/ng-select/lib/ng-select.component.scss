@@ -177,10 +177,17 @@ $ng-option-active-color: #fff;
       flex: 1;
     }
 
-    // Remove doubled bottom padding
-    .ng-select-container.ng-has-value .ng-value-container {
+    .ng-select-container.ng-has-value {
+      // Remove doubled bottom padding
+      .ng-value-container {
         padding-bottom: .25rem;
-    }
+      }
+
+      // Align input text with selected tags
+      .ng-input {
+          padding-top: 2px;
+      }
+    } 
   } // END ng-select-multiple
 
 
@@ -198,7 +205,7 @@ $ng-option-active-color: #fff;
   }
 
   &.ng-select-filtered {
-    .ng-select-container.ng-has-value {
+    .ng-select-container {
       grid-template: "value clear arrow" auto / 1fr 2.5rem 2.5rem;
     }
   }
