@@ -1,4 +1,11 @@
-# 3.1.4
+# 3.1.5
+
+### Bug Fixes
+
+* :wheelchair: remove duplicative listbox role and simplify dropdown content area ([1fedcaf](https://github.com/ng-select/ng-select/commit/
+* :lipstick: fix for interaction states and alignment in Safari ([dfb1bb2](https://github.com/ng-select/ng-select/commit/dfb1bb28c18c6fbb8865886ce5233cc6c9bff836))
+
+## 3.1.4
 
 ### Bug Fixes
 
