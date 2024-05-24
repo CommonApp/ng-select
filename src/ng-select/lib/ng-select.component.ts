@@ -24,6 +24,8 @@ import {
     InjectionToken,
     Attribute,
     ViewChildren,
+    booleanAttribute,
+    numberAttribute
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { takeUntil, startWith, tap, debounceTime, map, filter } from 'rxjs/operators';
@@ -75,53 +77,46 @@ export type GroupValueFn = (key: string | any, children: any[]) => string | any;
     changeDetection: ChangeDetectionStrategy.OnPush,
     })
 export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterViewInit, ControlValueAccessor {
+
+    @Input() bindLabel: string;
+    @Input() bindValue: string;
+    @Input({transform: booleanAttribute}) markFirst = true;
+    @Input() placeholder: string;
+    @Input() notFoundText: string;
+    @Input() typeToSearchText: string;
     @Input() addTagText: string;
     @Input() appearance: string;
     @Input() appendTo: string;
-    @Input() bindLabel: string;
-    @Input() bindValue: string;
-    @Input() bufferAmount = 4;
-    @Input() clearAllText: string;
-    @Input() clearOnBackspace = true;
-    @Input() closeOnSelect = true;
-    @Input() describedBy: string;
-    @Input() dropdownPosition: DropdownPosition = 'auto';
-    @Input() editableSearchTerm = true;
+    @Input({transform: booleanAttribute}) loading = false;
+    @Input({transform: booleanAttribute}) closeOnSelect = true;
+    @Input({transform: booleanAttribute}) hideSelected = false;
+    @Input({transform: booleanAttribute}) selectOnTab = false;
+    @Input({transform: booleanAttribute}) openOnEnter: boolean;
+    @Input({transform: numberAttribute}) maxSelectedItems: number;
     @Input() groupBy: string | ((value: any) => any);
     @Input() groupValue: GroupValueFn;
-    @Input() hideSelected = false;
-    @Input() inputAttrs: { [key: string]: string } = {};
-    @Input() invalid: boolean;
-    @Input() labelForId: string;
-    @Input() labelledBy: string;
-    @Input() loading = false;
-    @Input() loadingText: string;
-    @Input() markFirst = true;
-    @Input() maxSelectedItems: number;
-    @Input() minTermLength = 0;
-    @Input() notFoundText: string;
-    @Input() openOnEnter: boolean;
-    @Input() placeholder: string;
-    @Input() readonly = false;
-    @Input() required: boolean;
+    @Input({transform: numberAttribute}) bufferAmount = 4;
+    @Input({transform: booleanAttribute}) virtualScroll: boolean;
+    @Input({transform: booleanAttribute}) selectableGroup = false;
+    @Input({transform: booleanAttribute}) selectableGroupAsModel = true;
     @Input() searchFn = null;
-    @Input() searchWhileComposing = true;
-    @Input() selectableGroup = false;
-    @Input() selectableGroupAsModel = true;
-    @Input() selectOnTab = false;
-    @Input() tabIndex: number;
     @Input() trackByFn = null;
-    @Input() typeToSearchText: string;
-    @Input() virtualScroll: boolean;
-
+    @Input({transform: booleanAttribute}) clearOnBackspace = true;
+    @Input() labelForId = null;
+    @Input() inputAttrs: { [key: string]: string } = {};
+    @Input({transform: numberAttribute}) tabIndex: number;
+    @Input({transform: booleanAttribute}) readonly = false;
+    @Input({transform: booleanAttribute}) searchWhileComposing = true;
+    @Input({transform: numberAttribute}) minTermLength = 0;
+    @Input({transform: booleanAttribute}) editableSearchTerm = false;
     @Input() keyDownFn = (_: KeyboardEvent) => true;
 
     @Input() @HostBinding('class.ng-select-typeahead') typeahead: Subject<string>;
-    @Input() @HostBinding('class.ng-select-multiple') multiple = false;
+    @Input({transform: booleanAttribute}) @HostBinding('class.ng-select-multiple') multiple = false;
     @Input() @HostBinding('class.ng-select-taggable') addTag: boolean | AddTagFn = false;
-    @Input() @HostBinding('class.ng-select-searchable') searchable = true;
-    @Input() @HostBinding('class.ng-select-clearable') clearable = true;
-    @Input() @HostBinding('class.ng-select-opened') isOpen?: boolean = false;
+    @Input({transform: booleanAttribute}) @HostBinding('class.ng-select-searchable') searchable = true;
+    @Input({transform: booleanAttribute}) @HostBinding('class.ng-select-clearable') clearable = true;
+    @Input({transform: booleanAttribute}) @HostBinding('class.ng-select-opened') isOpen? = false;
 
     @Input()
     get items() {
