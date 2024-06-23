@@ -93,7 +93,7 @@
 @if (isOpen) {
     <ng-dropdown-panel
     *ngIf="isOpen"
-    class="ng-dropdown-panel"
+    class="ng-dropdown-panel dropdownPanelStaticClasses"
     [class.ng-select-multiple]="multiple"
     [id]="dropdownId"
     role="listbox"
@@ -105,7 +105,7 @@
     [headerTemplate]="headerTemplate"
     [items]="itemsList.filteredItems"
     [markedItem]="itemsList.markedItem"
-    [ngClass]="appendTo ? classes : null"
+    [ngClass]="appendTo ? ngClass : null"
     [position]="dropdownPosition"
     [virtualScroll]="virtualScroll"
     (outsideClick)="close()"
