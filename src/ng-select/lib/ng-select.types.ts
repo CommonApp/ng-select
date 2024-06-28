@@ -1,15 +1,15 @@
 export interface NgOption {
-    [name: string]: any;
+	[name: string]: any;
 
-    index?: number;
-    htmlId?: string;
-    selected?: boolean;
-    disabled?: boolean;
-    marked?: boolean;
-    label?: string;
-    value?: string | any;
-    parent?: NgOption;
-    children?: NgOption[];
+	index?: number;
+	htmlId?: string;
+	selected?: boolean;
+	disabled?: boolean;
+	marked?: boolean;
+	label?: string;
+	value?: string | any;
+	parent?: NgOption;
+	children?: NgOption[];
 }
 
 export enum KeyCode {
