@@ -80,7 +80,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterVie
 
     @Input() bindLabel: string;
     @Input() bindValue: string;
-    @Input({transform: booleanAttribute}) markFirst = true;
+    @Input({ transform: booleanAttribute }) markFirst = true;
     @Input() placeholder: string;
     @Input() notFoundText: string;
     @Input() typeToSearchText: string;
@@ -94,28 +94,29 @@ export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterVie
     @Input() describedBy: string;
     @Input() labelledBy: string;
     @Input() dropdownPosition: DropdownPosition = 'auto';
-    @Input({transform: booleanAttribute}) loading = false;
-    @Input({transform: booleanAttribute}) closeOnSelect = true;
-    @Input({transform: booleanAttribute}) hideSelected = false;
-    @Input({transform: booleanAttribute}) selectOnTab = false;
-    @Input({transform: booleanAttribute}) openOnEnter: boolean;
-    @Input({transform: numberAttribute}) maxSelectedItems: number;
+    @Input() preventToggleOnRightClick: boolean = false;
+    @Input({ transform: booleanAttribute }) loading = false;
+    @Input({ transform: booleanAttribute }) closeOnSelect = true;
+    @Input({ transform: booleanAttribute }) hideSelected = false;
+    @Input({ transform: booleanAttribute }) selectOnTab = false;
+    @Input({ transform: booleanAttribute }) openOnEnter: boolean;
+    @Input({ transform: numberAttribute }) maxSelectedItems: number;
     @Input() groupBy: string | ((value: any) => any);
     @Input() groupValue: GroupValueFn;
-    @Input({transform: numberAttribute}) bufferAmount = 4;
-    @Input({transform: booleanAttribute}) virtualScroll: boolean;
-    @Input({transform: booleanAttribute}) selectableGroup = false;
-    @Input({transform: booleanAttribute}) selectableGroupAsModel = true;
+    @Input({ transform: numberAttribute }) bufferAmount = 4;
+    @Input({ transform: booleanAttribute }) virtualScroll: boolean;
+    @Input({ transform: booleanAttribute }) selectableGroup = false;
+    @Input({ transform: booleanAttribute }) selectableGroupAsModel = true;
     @Input() searchFn = null;
     @Input() trackByFn = null;
-    @Input({transform: booleanAttribute}) clearOnBackspace = true;
+    @Input({ transform: booleanAttribute }) clearOnBackspace = true;
     @Input() labelForId = null;
     @Input() inputAttrs: { [key: string]: string } = {};
-    @Input({transform: numberAttribute}) tabIndex: number;
-    @Input({transform: booleanAttribute}) readonly = false;
-    @Input({transform: booleanAttribute}) searchWhileComposing = true;
-    @Input({transform: numberAttribute}) minTermLength = 0;
-    @Input({transform: booleanAttribute}) editableSearchTerm = false;
+    @Input({ transform: numberAttribute }) tabIndex: number;
+    @Input({ transform: booleanAttribute }) readonly = false;
+    @Input({ transform: booleanAttribute }) searchWhileComposing = true;
+    @Input({ transform: numberAttribute }) minTermLength = 0;
+    @Input({ transform: booleanAttribute }) editableSearchTerm = false;
     @Input() keyDownFn = (_: KeyboardEvent) => true;
     @Input() ngClass = null;
 
@@ -415,6 +416,9 @@ export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterVie
 	}
 
 	handleMousedown($event: MouseEvent) {
+		if (this.preventToggleOnRightClick && $event.button === 2) {
+			return false;
+		}
 		const target = $event.target as HTMLElement;
 		if (target.tagName !== 'INPUT') {
 			$event.preventDefault();
