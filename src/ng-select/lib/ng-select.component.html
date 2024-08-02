@@ -32,12 +32,11 @@
       }
     }
 
-    @if (multiple && multiLabelTemplate && selectedValues.length > 0) {
-      <ng-template
-                [ngTemplateOutlet]="multiLabelTemplate"
-                [ngTemplateOutletContext]="{ items: selectedValues, clear: clearItem }">
-        </ng-template>
-    }
+        @if (multiple && multiLabelTemplate && selectedValues.length > 0) {
+            <ng-template [ngTemplateOutlet]="multiLabelTemplate"
+                         [ngTemplateOutletContext]="{ items: selectedValues, clear: clearItem }">
+            </ng-template>
+        }
 
     <div class="ng-input">
       <input
@@ -85,14 +84,14 @@
       </span>
     }
 
-	<span class="ng-arrow-wrapper">
+    <span class="ng-arrow-wrapper">
 		<span class="ng-arrow"></span>
 	</span>
 </div>
 
 @if (isOpen) {
     <ng-dropdown-panel
-    class="ng-dropdown-panel dropdownPanelStaticClasses"
+    class="ng-dropdown-panel"
     [class.ng-select-multiple]="multiple"
     [id]="dropdownId"
     role="listbox"
