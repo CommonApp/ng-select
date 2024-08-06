@@ -92,9 +92,30 @@ npm install --save @ng-select/ng-select
 yarn add @ng-select/ng-select
 ```
 
-### Step 2: Import the NgSelectModule and angular FormsModule module:
+### Step 2: 
 
-```js
+#### Standalone: Import NgSelectComponent and other necessary directives directly:
+```typescript
+import { NgSelectModule, NgLabelTemplateDirective, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'example',
+  standalone: true,
+  template: './example.component.html',
+  styleUrl: './example.component.scss',
+  imports: [
+    NgSelectComponent,
+    NgOptionTemplateDirective,
+    NgLabelTemplateDirective,
+  ],
+})
+export class ExampleComponent {}
+```
+
+#### NgModule: Import the NgSelectModule and angular FormsModule module:
+
+```typescript
 import { NgSelectModule } from "@ng-select/ng-select";
 import { FormsModule } from "@angular/forms";
 
