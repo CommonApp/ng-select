@@ -93,6 +93,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterVie
     @Input() bindValue: string;
     @Input({ transform: booleanAttribute }) markFirst = true;
     @Input() placeholder: string;
+    @Input() fixedPlaceholder: boolean;
     @Input() notFoundText: string;
     @Input() typeToSearchText: string;
     @Input() addTagText: string;
@@ -1152,22 +1153,23 @@ export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterVie
 		return term && term.length >= this.minTermLength;
 	}
 
-    private _mergeGlobalConfig(config: NgSelectConfig) {
-        this.placeholder = this.placeholder || config.placeholder;
-        this.notFoundText = this.notFoundText || config.notFoundText;
-        this.typeToSearchText = this.typeToSearchText || config.typeToSearchText;
-        this.addTagText = this.addTagText || config.addTagText;
-        this.loadingText = this.loadingText || config.loadingText;
-        this.clearAllText = this.clearAllText || config.clearAllText;
-        this.virtualScroll = isDefined(this.virtualScroll)
-            ? this.virtualScroll
-            : isDefined(config.disableVirtualScroll)
-                ? !config.disableVirtualScroll
-                : false;
-        this.openOnEnter = isDefined(this.openOnEnter) ? this.openOnEnter : config.openOnEnter;
-        this.appendTo = this.appendTo || config.appendTo;
-        this.bindValue = this.bindValue || config.bindValue;
-        this.bindLabel = this.bindLabel || config.bindLabel;
-        this.appearance = this.appearance || config.appearance;
-    }
+	private _mergeGlobalConfig(config: NgSelectConfig) {
+		this.placeholder = this.placeholder || config.placeholder;
+    this.fixedPlaceholder = this.fixedPlaceholder || config.fixedPlaceholder;
+		this.notFoundText = this.notFoundText || config.notFoundText;
+		this.typeToSearchText = this.typeToSearchText || config.typeToSearchText;
+		this.addTagText = this.addTagText || config.addTagText;
+		this.loadingText = this.loadingText || config.loadingText;
+		this.clearAllText = this.clearAllText || config.clearAllText;
+		this.virtualScroll = isDefined(this.virtualScroll)
+			? this.virtualScroll
+			: isDefined(config.disableVirtualScroll)
+				? !config.disableVirtualScroll
+				: false;
+		this.openOnEnter = isDefined(this.openOnEnter) ? this.openOnEnter : config.openOnEnter;
+		this.appendTo = this.appendTo || config.appendTo;
+		this.bindValue = this.bindValue || config.bindValue;
+		this.bindLabel = this.bindLabel || config.bindLabel;
+		this.appearance = this.appearance || config.appearance;
+	}
 }
