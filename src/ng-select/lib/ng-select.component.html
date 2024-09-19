@@ -32,11 +32,10 @@
       }
     }
 
-        @if (multiple && multiLabelTemplate && selectedValues.length > 0) {
-            <ng-template [ngTemplateOutlet]="multiLabelTemplate"
-                         [ngTemplateOutletContext]="{ items: selectedValues, clear: clearItem }">
-            </ng-template>
-        }
+		@if (multiple && multiLabelTemplate && selectedValues.length > 0) {
+			<ng-template [ngTemplateOutlet]="multiLabelTemplate" [ngTemplateOutletContext]="{ items: selectedValues, clear: clearItem }">
+			</ng-template>
+		}
 
     <div class="ng-input">
       <input
@@ -64,6 +63,7 @@
         (blur)="onInputBlur($event)"
         (change)="$event.stopPropagation()"
         (focus)="onInputFocus($event)"
+        role="combobox"
       />
     </div>
   </div>
@@ -73,9 +73,7 @@
             <div class="ng-spinner-loader"></div>
         </ng-template>
 
-        <ng-template
-            [ngTemplateOutlet]="loadingSpinnerTemplate || defaultLoadingSpinnerTemplate">
-        </ng-template>
+        <ng-template [ngTemplateOutlet]="loadingSpinnerTemplate || defaultLoadingSpinnerTemplate"></ng-template>
   }
 
     @if (showClear()) {
@@ -84,7 +82,7 @@
       </span>
     }
 
-    <span class="ng-arrow-wrapper">
+	<span class="ng-arrow-wrapper">
 		<span class="ng-arrow"></span>
 	</span>
 </div>
