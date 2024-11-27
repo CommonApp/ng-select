@@ -87,6 +87,13 @@ export class NgSelectComponent implements OnDestroy, OnChanges, OnInit, AfterVie
     @Input() addTagText: string;
     @Input() appearance: string;
     @Input() appendTo: string;
+    @Input() clearAllText: string;
+    @Input() loadingText: string;
+    @Input() required: boolean;
+    @Input() invalid: boolean;
+    @Input() describedBy: string;
+    @Input() labelledBy: string;
+    @Input() dropdownPosition: DropdownPosition = 'auto';
     @Input({transform: booleanAttribute}) loading = false;
     @Input({transform: booleanAttribute}) closeOnSelect = true;
     @Input({transform: booleanAttribute}) hideSelected = false;
