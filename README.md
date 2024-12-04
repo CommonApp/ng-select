@@ -29,4 +29,77 @@ ng-select versioning and release strategy mimics that of Forge: https://cawiki.a
 
 Release branches should be created and tested against, and should be where bug fixes are made and administrative release tasks like version bumping and changelog updates should occur.
 
-Once a release is ready, an `npm publish` should be run, but only those with permission can do so. Please reach out to Greg or Nick if you encounter any issues.
+#### Follow the steps below to release a new verson:
+
+1. Create a release branch.
+
+```
+git checkout -b <release-branch>
+```
+
+2. Perform safety checks.
+Ensure your local environment is in sync with the main branch:
+
+```
+git pull origin main
+git status
+npm ci
+```
+
+3. Update the version.
+Choose the appropriate versioning strategy:
+
+Pre-release
+
+```
+npm version [premajor|preminor|prepatch] --preid=rc
+```
+
+Full release
+
+```
+npm version [major|minor|patch]
+```
+
+4. Update the CHANGELOG
+Manually update the `CHANGELOG.md` file to include recent changes.
+
+5. Merge the release branch into master
+
+6. Create an annotated git tag
+Create a version-specific git tag: 
+```
+git tag -a <version> -m "Release v<version>"
+```
+
+7. Push branch changes and tags
+Push all changes and the new tag to the remote repository:
+
+```
+git push --tags
+```
+
+8. Create a GitHub release
+Using GitHub’s UI:
+    1. Navigate to Releases > Tags.
+    2. Select the newly created tag.
+    3. Choose Create release from tag.
+    4. Fill in the release title with the version number.
+    5. Include the updated changelog as the release body.
+    6. If this is a pre-release (e.g., alpha or beta), check the Pre-release option before creating the release. 
+
+9. Build and publish the release
+    1. On the master branch
+      ```
+      npm run build
+      ```
+    2. Navigate to the dist/ng-select directory
+      ```
+      cd ./dist/ng-select
+      ``` 
+    3. Publish the package
+      ```
+      npm publish
+    ```
+
+10. After a successful release, create a PR to merge the master branch into develop.
